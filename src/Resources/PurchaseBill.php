@@ -7,7 +7,7 @@ namespace Leventcz\Parasut\Resources;
 use Leventcz\Parasut\Exceptions\ClientException;
 use Leventcz\Parasut\ValueObjects\Method;
 
-final class PurchaseBill extends Resource
+final class PurchaseBill extends ApiResource
 {
     /**
      * @param  array  $query

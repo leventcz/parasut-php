@@ -6,7 +6,7 @@ namespace Leventcz\Parasut\Resources;
 
 use Leventcz\Parasut\Http\HttpClientInterface;
 
-abstract class Resource
+abstract class ApiResource
 {
     /**
      * @param  HttpClientInterface  $httpClient

@@ -7,7 +7,7 @@ namespace Leventcz\Parasut\Resources;
 use Leventcz\Parasut\Exceptions\ClientException;
 use Leventcz\Parasut\ValueObjects\Method;
 
-class Contact extends Resource
+class Contact extends ApiResource
 {
     /**
      * @param  array  $query
