@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace Leventcz\Parasut;
 
-use Leventcz\Parasut\Endpoints\BankFee;
-use Leventcz\Parasut\Endpoints\Contact;
-use Leventcz\Parasut\Endpoints\PurchaseBill;
-use Leventcz\Parasut\Endpoints\SalesInvoice;
 use Leventcz\Parasut\Http\HttpClientInterface;
-use Leventcz\Parasut\ValueObjects\Credential;
+use Leventcz\Parasut\Resources\BankFee;
+use Leventcz\Parasut\Resources\Contact;
+use Leventcz\Parasut\Resources\PurchaseBill;
+use Leventcz\Parasut\Resources\SalesInvoice;
 
 readonly class Client
 {
     /**
      * @param  HttpClientInterface  $httpClient
-     * @param  Credential  $credential
      */
-    public function __construct(private HttpClientInterface $httpClient, private Credential $credential)
+    public function __construct(private HttpClientInterface $httpClient)
     {
     }
 
@@ -26,7 +24,7 @@ readonly class Client
      */
     public function salesInvoice(): SalesInvoice
     {
-        return new SalesInvoice($this->httpClient, $this->credential);
+        return new SalesInvoice($this->httpClient);
     }
 
     /**
@@ -34,7 +32,7 @@ readonly class Client
      */
     public function contact(): Contact
     {
-        return new Contact($this->httpClient, $this->credential);
+        return new Contact($this->httpClient);
     }
 
     /**
@@ -42,7 +40,7 @@ readonly class Client
      */
     public function purchaseBill(): PurchaseBill
     {
-        return new PurchaseBill($this->httpClient, $this->credential);
+        return new PurchaseBill($this->httpClient);
     }
 
     /**
@@ -50,6 +48,6 @@ readonly class Client
      */
     public function bankFee(): BankFee
     {
-        return new BankFee($this->httpClient, $this->credential);
+        return new BankFee($this->httpClient);
     }
 }

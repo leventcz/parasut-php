@@ -2,21 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Leventcz\Parasut\Endpoints;
+namespace Leventcz\Parasut\Resources;
 
-use Leventcz\Parasut\Exceptions\ParasutException;
+use Leventcz\Parasut\Exceptions\ClientException;
 use Leventcz\Parasut\ValueObjects\Method;
 
-class Contact extends Endpoint
+class Contact extends Resource
 {
     /**
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function index(array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::GET,
                 uri: 'contacts',
@@ -28,11 +29,12 @@ class Contact extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function create(array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::POST,
                 uri: 'contacts',
@@ -45,11 +47,12 @@ class Contact extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function show(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::GET,
                 uri: "contacts/$id",
@@ -62,11 +65,12 @@ class Contact extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function edit(int $id, array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::GET,
                 uri: "contacts/$id",
@@ -78,11 +82,12 @@ class Contact extends Endpoint
     /**
      * @param  int  $id
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function delete(int $id): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::DELETE,
                 uri: "contacts/$id",
@@ -94,11 +99,12 @@ class Contact extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function contactDebitTransactions(int $id, array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::POST,
                 uri: "contacts/$id/contact_debit_transactions",
@@ -112,11 +118,12 @@ class Contact extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function contactCreditTransactions(int $id, array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::POST,
                 uri: "contacts/$id/contact_credit_transactions",

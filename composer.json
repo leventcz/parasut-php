@@ -1,7 +1,7 @@
 {
     "name": "leventcz/parasut-php",
-    "description": "Paraşüt v4 client for PHP 8",
-    "keywords": ["paraşüt", "php"],
+    "description": "Parasut API v4 client for PHP",
+    "keywords": ["parasut", "php", "sdk"],
     "license": "MIT",
     "authors": [
         {
@@ -16,10 +16,11 @@
     },
     "require": {
         "php": "^8.2",
-        "guzzlehttp/guzzle": "^7.0"
+        "guzzlehttp/guzzle": "^7.0.0"
     },
     "require-dev": {
-        "pestphp/pest": "2.x-dev"
+        "pestphp/pest": "^2.x-dev",
+        "laravel/pint": "^1.5.0"
     },
     "config": {
         "allow-plugins": {
@@ -27,5 +28,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": false
+    "prefer-stable": true
 }

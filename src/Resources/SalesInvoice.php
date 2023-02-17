@@ -2,21 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Leventcz\Parasut\Endpoints;
+namespace Leventcz\Parasut\Resources;
 
-use Leventcz\Parasut\Exceptions\ParasutException;
+use Leventcz\Parasut\Exceptions\ClientException;
 use Leventcz\Parasut\ValueObjects\Method;
 
-class SalesInvoice extends Endpoint
+final class SalesInvoice extends Resource
 {
     /**
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function index(array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::GET,
                 uri: 'sales_invoices',
@@ -27,11 +28,12 @@ class SalesInvoice extends Endpoint
     /**
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function create(array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::POST,
                 uri: 'sales_invoices',
@@ -43,11 +45,12 @@ class SalesInvoice extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function show(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: METHOD::GET,
                 uri: "sales_invoices/$id",
@@ -59,11 +62,12 @@ class SalesInvoice extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function edit(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::PUT,
                 uri: "sales_invoices/$id",
@@ -76,11 +80,12 @@ class SalesInvoice extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function delete(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::DELETE,
                 uri: "sales_invoices/$id",
@@ -93,11 +98,12 @@ class SalesInvoice extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function pay(int $id, array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::POST,
                 uri: "sales_invoices/$id/payments",
@@ -110,11 +116,12 @@ class SalesInvoice extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function cancel(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::DELETE,
                 uri: "sales_invoices/$id/cancel",
@@ -126,11 +133,12 @@ class SalesInvoice extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function recover(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::PATCH,
                 uri: "sales_invoices/$id/recover",
@@ -142,11 +150,12 @@ class SalesInvoice extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function archive(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::PATCH,
                 uri: "sales_invoices/$id/archive",
@@ -158,11 +167,12 @@ class SalesInvoice extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function unArchive(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::PATCH,
                 uri: "sales_invoices/$id/unarchive",
@@ -175,11 +185,12 @@ class SalesInvoice extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function convertToInvoice(int $id, array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::PATCH,
                 uri: "sales_invoices/$id/convert_to_invoice",

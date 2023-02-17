@@ -4,26 +4,28 @@ declare(strict_types=1);
 
 namespace Leventcz\Parasut\Http;
 
-use Leventcz\Parasut\Exceptions\ParasutException;
+use Leventcz\Parasut\Exceptions\ClientException;
 use Leventcz\Parasut\ValueObjects\Method;
-use Psr\Http\Message\ResponseInterface;
 
 interface HttpClientInterface
 {
     /**
+     * @const string
+     */
+    public const BASE_URI = 'https://api.parasut.com';
+
+    /**
+     * @var string
+     */
+    public const VERSION = 'v4';
+
+    /**
      * @param  Method  $method
      * @param  string  $uri
-     * @param  array  $header
      * @param  array  $query
      * @param  array  $body
-     * @return ResponseInterface
-     * @throws ParasutException
+     * @return array|null
+     * @throws ClientException
      */
-    public function request(
-        Method $method,
-        string $uri,
-        array $header = [],
-        array $query = [],
-        array $body = []
-    ): ResponseInterface;
+    public function authenticatedRequest(Method $method, string $uri, array $query = [], array $body = []): ?array;
 }

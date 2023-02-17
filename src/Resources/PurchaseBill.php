@@ -2,21 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Leventcz\Parasut\Endpoints;
+namespace Leventcz\Parasut\Resources;
 
-use Leventcz\Parasut\Exceptions\ParasutException;
+use Leventcz\Parasut\Exceptions\ClientException;
 use Leventcz\Parasut\ValueObjects\Method;
 
-class PurchaseBill extends Endpoint
+final class PurchaseBill extends Resource
 {
     /**
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function index(array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::GET,
                 uri: 'purchase_bills',
@@ -28,11 +29,12 @@ class PurchaseBill extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function createBasic(array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::POST,
                 uri: 'purchase_bills#basic',
@@ -45,11 +47,12 @@ class PurchaseBill extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function createDetailed(array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::POST,
                 uri: 'purchase_bills#detailed',
@@ -62,11 +65,12 @@ class PurchaseBill extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function show(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::GET,
                 uri: "purchase_bills/$id",
@@ -77,11 +81,12 @@ class PurchaseBill extends Endpoint
     /**
      * @param  int  $id
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function delete(int $id): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::DELETE,
                 uri: "purchase_bills/$id",
@@ -93,11 +98,12 @@ class PurchaseBill extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function editBasic(int $id, array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::PUT,
                 uri: "purchase_bills/$id#basic",
@@ -111,11 +117,12 @@ class PurchaseBill extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function editDetailed(int $id, array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::PUT,
                 uri: "purchase_bills/$id#detailed",
@@ -129,11 +136,12 @@ class PurchaseBill extends Endpoint
      * @param  array  $query
      * @param  array  $body
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function pay(int $id, array $query = [], array $body = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::POST,
                 uri: "purchase_bills/$id/payments",
@@ -146,11 +154,12 @@ class PurchaseBill extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function cancel(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::DELETE,
                 uri: "purchase_bills/$id/payments",
@@ -162,11 +171,12 @@ class PurchaseBill extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function recover(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::PATCH,
                 uri: "purchase_bills/$id/recover",
@@ -178,11 +188,12 @@ class PurchaseBill extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function archive(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::PATCH,
                 uri: "purchase_bills/$id/archive",
@@ -194,11 +205,12 @@ class PurchaseBill extends Endpoint
      * @param  int  $id
      * @param  array  $query
      * @return array|null
-     * @throws ParasutException
+     * @throws ClientException
      */
     public function unArchive(int $id, array $query = []): ?array
     {
         return $this
+            ->httpClient
             ->authenticatedRequest(
                 method: Method::PATCH,
                 uri: "purchase_bills/$id/unarchive",

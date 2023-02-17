@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Leventcz\Parasut\Exceptions;
 
-class ValidationException extends ParasutException
+class ValidationException extends ClientException
 {
-
 }

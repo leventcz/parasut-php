@@ -8,21 +8,103 @@ use GuzzleHttp\Client;
 use Leventcz\Parasut\Exceptions\BadRequestException;
 use Leventcz\Parasut\Exceptions\HttpException;
 use Leventcz\Parasut\Exceptions\NotFoundException;
-use Leventcz\Parasut\Exceptions\ParasutException;
+use Leventcz\Parasut\Exceptions\ClientException;
 use Leventcz\Parasut\Exceptions\UnauthorizedException;
 use Leventcz\Parasut\Exceptions\ValidationException;
+use Leventcz\Parasut\ValueObjects\Credential;
 use Leventcz\Parasut\ValueObjects\Method;
+use Leventcz\Parasut\ValueObjects\Token;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-readonly final class HttpClient implements HttpClientInterface
+final class HttpClient implements HttpClientInterface
 {
     /**
+     * @var Token
+     */
+    private Token $token;
+
+    /**
      * @param  Client  $client
+     * @param  Credential  $credential
      * @param  array  $options
      */
-    public function __construct(private Client $client, private array $options = [])
+    public function __construct(
+        private readonly Client $client,
+        private readonly Credential $credential,
+        private readonly array $options = []
+    ) {
+    }
+
+    /**
+     * @param  Method  $method
+     * @param  string  $uri
+     * @param  array  $query
+     * @param  array  $body
+     * @return array|null
+     * @throws ClientException
+     */
+    public function authenticatedRequest(Method $method, string $uri, array $query = [], array $body = []): ?array
     {
+        $response = $this
+            ->request(
+                method: $method,
+                uri: $this->buildCompanyUri($uri),
+                header: $this->authorizationHeader(),
+                query: $query,
+                body: $body,
+            );
+
+        return $this->parseResponse($response);
+    }
+
+    /**
+     * @return Token
+     * @throws ClientException
+     */
+    private function getNewToken(): Token
+    {
+        $response = $this
+            ->request(
+                method: Method::POST,
+                uri: 'oauth/token',
+                body: [
+                    'client_id' => $this->credential->clientId,
+                    'client_secret' => $this->credential->clientSecret,
+                    'username' => $this->credential->userName,
+                    'password' => $this->credential->password,
+                    'redirect_uri' => 'urn:ietf:wg:oauth:2.0:oob',
+                    'grant_type' => 'password',
+                ]
+            );
+
+        $attributes = $this->parseResponse($response);
+
+        return Token::fromArray($attributes);
+    }
+
+    /**
+     * @return Token
+     * @throws ClientException
+     */
+    private function refreshExistingToken(): Token
+    {
+        $response = $this
+            ->request(
+                method: Method::POST,
+                uri: 'oauth/token',
+                body: [
+                    'client_id' => $this->credential->clientId,
+                    'client_secret' => $this->credential->clientSecret,
+                    'refresh_token' => $this->token->refreshToken,
+                    'redirect_uri' => 'urn:ietf:wg:oauth:2.0:oob',
+                    'grant_type' => 'refresh_token',
+                ]
+            );
+
+        $attributes = $this->parseResponse($response);
+
+        return Token::fromArray($attributes);
     }
 
     /**
@@ -32,9 +114,9 @@ readonly final class HttpClient implements HttpClientInterface
      * @param  array  $query
      * @param  array  $body
      * @return ResponseInterface
-     * @throws ParasutException
+     * @throws ClientException
      */
-    public function request(
+    private function request(
         Method $method,
         string $uri,
         array $header = [],
@@ -48,6 +130,7 @@ readonly final class HttpClient implements HttpClientInterface
                     $method->name,
                     $uri,
                     [
+                        'base_uri' => self::BASE_URI,
                         'http_errors' => false,
                         'headers' => [
                             'Accept' => 'application/json',
@@ -55,7 +138,7 @@ readonly final class HttpClient implements HttpClientInterface
                             ...$header,
                         ],
                         'query' => $query,
-                        'json' => $body
+                        'json' => $body,
                     ] + $this->options,
                 );
         } catch (Throwable $exception) {
@@ -72,7 +155,7 @@ readonly final class HttpClient implements HttpClientInterface
     /**
      * @param  ResponseInterface  $response
      * @return void
-     * @throws ParasutException
+     * @throws ClientException
      */
     private function handleRequestError(ResponseInterface $response): void
     {
@@ -94,5 +177,57 @@ readonly final class HttpClient implements HttpClientInterface
     private function requestIsFailed(ResponseInterface $response): bool
     {
         return ! in_array($response->getStatusCode(), [200, 201, 204]);
+    }
+
+    /**
+     * @param  string  $uri
+     * @return string
+     */
+    private function buildCompanyUri(string $uri): string
+    {
+        return sprintf('%s/%s/%s', self::VERSION, $this->credential->companyId, $uri);
+    }
+
+    /**
+     * @return Token
+     * @throws ClientException
+     */
+    private function getToken(): Token
+    {
+        if (! isset($this->token)) {
+            return $this->token = $this->getNewToken();
+        }
+
+        if ($this->tokenIsExpired()) {
+            return $this->token = $this->refreshExistingToken();
+        }
+
+        return $this->token;
+    }
+
+    /**
+     * @return string[]
+     * @throws ClientException
+     */
+    private function authorizationHeader(): array
+    {
+        return ['Authorization' => "Bearer {$this->getToken()->accessToken}"];
+    }
+
+    /**
+     * @return bool
+     */
+    private function tokenIsExpired(): bool
+    {
+        return $this->token->createdAt + $this->token->expiresIn > time();
+    }
+
+    /**
+     * @param  ResponseInterface  $response
+     * @return array|null
+     */
+    private function parseResponse(ResponseInterface $response): ?array
+    {
+        return json_decode((string) $response->getBody(), true) ?: null;
     }
 }

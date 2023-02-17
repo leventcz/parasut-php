@@ -1,7 +1,7 @@
 <?php
 
 use Leventcz\Parasut\Client;
-use Leventcz\Parasut\ClientFactory;
+use Leventcz\Parasut\Parasut;
 
 $sampleCredential = [
     'client_id' => '',
@@ -12,13 +12,13 @@ $sampleCredential = [
 ];
 
 it('creates simple client', function () use ($sampleCredential) {
-    $client = ClientFactory::create($sampleCredential);
+    $client = Parasut::client($sampleCredential);
 
     expect($client)->toBeInstanceOf(Client::class);
 });
 
 it('creates client with options', function () use ($sampleCredential) {
-    $client = ClientFactory::create($sampleCredential, ['debug' => true]);
+    $client = Parasut::client($sampleCredential, ['debug' => true]);
 
     expect($client)->toBeInstanceOf(Client::class);
 });
