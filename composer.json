@@ -1,0 +1,24 @@
+{
+    "name": "leventcz/parasut-php",
+    "description": "Paraşüt v4 client for PHP 8",
+    "keywords": ["paraşüt", "php"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Levent Çorapsız",
+            "email": "l.corapsiz@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Leventcz\\Parasut\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "^7.0",
+        "nesbot/carbon": "^2.4"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false
+}
