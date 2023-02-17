@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Leventcz\Parasut\Endpoints;
 
-use Carbon\Carbon;
 use Leventcz\Parasut\Exceptions\ParasutException;
 use Leventcz\Parasut\Http\HttpClientInterface;
 use Leventcz\Parasut\ValueObjects\Credential;
@@ -93,9 +92,7 @@ abstract class Endpoint
      */
     private function tokenIsExpired(): bool
     {
-        return Carbon::createFromTimestamp($this->token->createdAt)
-            ->addSeconds($this->token->expiresIn)
-            ->isPast();
+        return $this->token->createdAt + $this->token->expiresIn > time();
     }
 
     /**
