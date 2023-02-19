@@ -14,7 +14,7 @@ use Leventcz\Parasut\Resources\Concerns\ShowsResource;
 use Leventcz\Parasut\Resources\Concerns\UnArchivesResource;
 use Leventcz\Parasut\ValueObjects\Method;
 
-final class SalesInvoice extends ApiResource
+class SalesInvoice extends ApiResource
 {
     use IndexesResources;
     use CreatesResource;
