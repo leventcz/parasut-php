@@ -22,5 +22,4 @@ class ItemCategory extends ApiResource
      * @var string
      */
     protected string $resource = 'item_categories';
-
 }
