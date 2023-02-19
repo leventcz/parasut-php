@@ -8,7 +8,9 @@ use Leventcz\Parasut\Http\HttpClientInterface;
 use Leventcz\Parasut\Resources\BankFee;
 use Leventcz\Parasut\Resources\Contact;
 use Leventcz\Parasut\Resources\PurchaseBill;
+use Leventcz\Parasut\Resources\Salary;
 use Leventcz\Parasut\Resources\SalesInvoice;
+use Leventcz\Parasut\Resources\Tax;
 
 readonly class Client
 {
@@ -49,5 +51,21 @@ readonly class Client
     public function bankFee(): BankFee
     {
         return new BankFee($this->httpClient);
+    }
+
+    /**
+     * @return Salary
+     */
+    public function salary(): Salary
+    {
+        return new Salary($this->httpClient);
+    }
+
+    /**
+     * @return Tax
+     */
+    public function tax(): Tax
+    {
+        return new Tax($this->httpClient);
     }
 }
