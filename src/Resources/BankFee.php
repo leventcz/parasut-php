@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Leventcz\Parasut\Resources;
 
 use Leventcz\Parasut\Exceptions\ClientException;
+use Leventcz\Parasut\Resources\Concerns\ArchivesResource;
 use Leventcz\Parasut\Resources\Concerns\DeletesResource;
 use Leventcz\Parasut\Resources\Concerns\EditsResource;
 use Leventcz\Parasut\Resources\Concerns\IndexesResources;
 use Leventcz\Parasut\Resources\Concerns\ShowsResource;
+use Leventcz\Parasut\Resources\Concerns\UnArchivesResource;
 use Leventcz\Parasut\ValueObjects\Method;
 
 class BankFee extends ApiResource
@@ -17,45 +19,13 @@ class BankFee extends ApiResource
     use ShowsResource;
     use EditsResource;
     use DeletesResource;
+    use ArchivesResource;
+    use UnArchivesResource;
 
     /**
      * @var string
      */
     protected string $resource = 'bank_fees';
-
-    /**
-     * @param  int  $id
-     * @param  array  $query
-     * @return array|null
-     * @throws ClientException
-     */
-    public function archive(int $id, array $query = []): ?array
-    {
-        return $this
-            ->getHttpClient()
-            ->authenticatedRequest(
-                method: Method::PATCH,
-                uri: "{$this->getResource()}/$id/archive",
-                query: $query
-            );
-    }
-
-    /**
-     * @param  int  $id
-     * @param  array  $query
-     * @return array|null
-     * @throws ClientException
-     */
-    public function unArchive(int $id, array $query = []): ?array
-    {
-        return $this
-            ->getHttpClient()
-            ->authenticatedRequest(
-                method: Method::PATCH,
-                uri: "{$this->getResource()}/$id/unarchive",
-                query: $query
-            );
-    }
 
     /**
      * @param  int  $id
