@@ -5,25 +5,21 @@ declare(strict_types=1);
 namespace Leventcz\Parasut\Resources;
 
 use Leventcz\Parasut\Exceptions\ClientException;
+use Leventcz\Parasut\Resources\Concerns\DeletesResource;
+use Leventcz\Parasut\Resources\Concerns\IndexesResources;
+use Leventcz\Parasut\Resources\Concerns\ShowsResource;
 use Leventcz\Parasut\ValueObjects\Method;
 
-final class PurchaseBill extends ApiResource
+class PurchaseBill extends ApiResource
 {
+    use IndexesResources;
+    use ShowsResource;
+    use DeletesResource;
+
     /**
-     * @param  array  $query
-     * @return array|null
-     * @throws ClientException
+     * @var string
      */
-    public function index(array $query = []): ?array
-    {
-        return $this
-            ->httpClient
-            ->authenticatedRequest(
-                method: Method::GET,
-                uri: 'purchase_bills',
-                query: $query,
-            );
-    }
+    protected string $resource = 'purchase_bills';
 
     /**
      * @param  array  $query
@@ -34,10 +30,10 @@ final class PurchaseBill extends ApiResource
     public function createBasic(array $query = [], array $body = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::POST,
-                uri: 'purchase_bills#basic',
+                uri: "{$this->getResource()}#basic",
                 query: $query,
                 body: $body,
             );
@@ -52,44 +48,12 @@ final class PurchaseBill extends ApiResource
     public function createDetailed(array $query = [], array $body = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::POST,
-                uri: 'purchase_bills#detailed',
+                uri: "{$this->getResource()}#detailed",
                 query: $query,
                 body: $body,
-            );
-    }
-
-    /**
-     * @param  int  $id
-     * @param  array  $query
-     * @return array|null
-     * @throws ClientException
-     */
-    public function show(int $id, array $query = []): ?array
-    {
-        return $this
-            ->httpClient
-            ->authenticatedRequest(
-                method: Method::GET,
-                uri: "purchase_bills/$id",
-                query: $query,
-            );
-    }
-
-    /**
-     * @param  int  $id
-     * @return array|null
-     * @throws ClientException
-     */
-    public function delete(int $id): ?array
-    {
-        return $this
-            ->httpClient
-            ->authenticatedRequest(
-                method: Method::DELETE,
-                uri: "purchase_bills/$id",
             );
     }
 
@@ -103,10 +67,10 @@ final class PurchaseBill extends ApiResource
     public function editBasic(int $id, array $query = [], array $body = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::PUT,
-                uri: "purchase_bills/$id#basic",
+                uri: "{$this->getResource()}/$id#basic",
                 query: $query,
                 body: $body,
             );
@@ -122,10 +86,10 @@ final class PurchaseBill extends ApiResource
     public function editDetailed(int $id, array $query = [], array $body = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::PUT,
-                uri: "purchase_bills/$id#detailed",
+                uri: "{$this->getResource()}/$id#detailed",
                 query: $query,
                 body: $body,
             );
@@ -141,10 +105,10 @@ final class PurchaseBill extends ApiResource
     public function pay(int $id, array $query = [], array $body = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::POST,
-                uri: "purchase_bills/$id/payments",
+                uri: "{$this->getResource()}/$id/payments",
                 query: $query,
                 body: $body,
             );
@@ -159,10 +123,10 @@ final class PurchaseBill extends ApiResource
     public function cancel(int $id, array $query = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::DELETE,
-                uri: "purchase_bills/$id/payments",
+                uri: "{$this->getResource()}/$id/payments",
                 query: $query,
             );
     }
@@ -176,10 +140,10 @@ final class PurchaseBill extends ApiResource
     public function recover(int $id, array $query = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::PATCH,
-                uri: "purchase_bills/$id/recover",
+                uri: "{$this->getResource()}/$id/recover",
                 query: $query,
             );
     }
@@ -193,10 +157,10 @@ final class PurchaseBill extends ApiResource
     public function archive(int $id, array $query = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::PATCH,
-                uri: "purchase_bills/$id/archive",
+                uri: "{$this->getResource()}/$id/archive",
                 query: $query,
             );
     }
@@ -210,10 +174,10 @@ final class PurchaseBill extends ApiResource
     public function unArchive(int $id, array $query = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::PATCH,
-                uri: "purchase_bills/$id/unarchive",
+                uri: "{$this->getResource()}/$id/unarchive",
                 query: $query,
             );
     }

@@ -5,93 +5,25 @@ declare(strict_types=1);
 namespace Leventcz\Parasut\Resources;
 
 use Leventcz\Parasut\Exceptions\ClientException;
+use Leventcz\Parasut\Resources\Concerns\CreatesResource;
+use Leventcz\Parasut\Resources\Concerns\DeletesResource;
+use Leventcz\Parasut\Resources\Concerns\EditsResource;
+use Leventcz\Parasut\Resources\Concerns\IndexesResources;
+use Leventcz\Parasut\Resources\Concerns\ShowsResource;
 use Leventcz\Parasut\ValueObjects\Method;
 
 final class SalesInvoice extends ApiResource
 {
-    /**
-     * @param  array  $query
-     * @return array|null
-     * @throws ClientException
-     */
-    public function index(array $query = []): ?array
-    {
-        return $this
-            ->httpClient
-            ->authenticatedRequest(
-                method: Method::GET,
-                uri: 'sales_invoices',
-                query: $query
-            );
-    }
+    use IndexesResources;
+    use CreatesResource;
+    use ShowsResource;
+    use EditsResource;
+    use DeletesResource;
 
     /**
-     * @param  array  $body
-     * @return array|null
-     * @throws ClientException
+     * @var string
      */
-    public function create(array $body = []): ?array
-    {
-        return $this
-            ->httpClient
-            ->authenticatedRequest(
-                method: Method::POST,
-                uri: 'sales_invoices',
-                body: $body
-            );
-    }
-
-    /**
-     * @param  int  $id
-     * @param  array  $query
-     * @return array|null
-     * @throws ClientException
-     */
-    public function show(int $id, array $query = []): ?array
-    {
-        return $this
-            ->httpClient
-            ->authenticatedRequest(
-                method: METHOD::GET,
-                uri: "sales_invoices/$id",
-                query: $query
-            );
-    }
-
-    /**
-     * @param  int  $id
-     * @param  array  $query
-     * @return array|null
-     * @throws ClientException
-     */
-    public function edit(int $id, array $query = []): ?array
-    {
-        return $this
-            ->httpClient
-            ->authenticatedRequest(
-                method: Method::PUT,
-                uri: "sales_invoices/$id",
-                query: $query,
-                body: $query
-            );
-    }
-
-    /**
-     * @param  int  $id
-     * @param  array  $query
-     * @return array|null
-     * @throws ClientException
-     */
-    public function delete(int $id, array $query = []): ?array
-    {
-        return $this
-            ->httpClient
-            ->authenticatedRequest(
-                method: Method::DELETE,
-                uri: "sales_invoices/$id",
-                query: $query
-            );
-    }
+    protected string $resource = 'sales_invoices';
 
     /**
      * @param  int  $id
@@ -103,10 +35,10 @@ final class SalesInvoice extends ApiResource
     public function pay(int $id, array $query = [], array $body = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::POST,
-                uri: "sales_invoices/$id/payments",
+                uri: "{$this->getResource()}/$id/payments",
                 query: $query,
                 body: $body,
             );
@@ -121,10 +53,10 @@ final class SalesInvoice extends ApiResource
     public function cancel(int $id, array $query = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::DELETE,
-                uri: "sales_invoices/$id/cancel",
+                uri: "{$this->getResource()}/$id/cancel",
                 query: $query,
             );
     }
@@ -138,10 +70,10 @@ final class SalesInvoice extends ApiResource
     public function recover(int $id, array $query = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::PATCH,
-                uri: "sales_invoices/$id/recover",
+                uri: "{$this->getResource()}/$id/recover",
                 query: $query,
             );
     }
@@ -155,10 +87,10 @@ final class SalesInvoice extends ApiResource
     public function archive(int $id, array $query = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::PATCH,
-                uri: "sales_invoices/$id/archive",
+                uri: "{$this->getResource()}/$id/archive",
                 query: $query,
             );
     }
@@ -172,10 +104,10 @@ final class SalesInvoice extends ApiResource
     public function unArchive(int $id, array $query = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::PATCH,
-                uri: "sales_invoices/$id/unarchive",
+                uri: "{$this->getResource()}/$id/unarchive",
                 query: $query,
             );
     }
@@ -190,10 +122,10 @@ final class SalesInvoice extends ApiResource
     public function convertToInvoice(int $id, array $query = [], array $body = []): ?array
     {
         return $this
-            ->httpClient
+            ->getHttpClient()
             ->authenticatedRequest(
                 method: Method::PATCH,
-                uri: "sales_invoices/$id/convert_to_invoice",
+                uri: "{$this->getResource()}/$id/convert_to_invoice",
                 query: $query,
                 body: $body,
             );
