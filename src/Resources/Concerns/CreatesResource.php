@@ -21,7 +21,7 @@ trait CreatesResource
         return $this
             ->getHttpClient()
             ->authenticatedRequest(
-                method: Method::GET,
+                method: Method::POST,
                 uri: $this->getResource(),
                 body: $body,
             );
