@@ -219,7 +219,7 @@ final class HttpClient implements HttpClientInterface
      */
     private function tokenIsExpired(): bool
     {
-        return $this->token->createdAt + $this->token->expiresIn > time();
+        return ($this->token->createdAt + $this->token->expiresIn) <= gmdate('U');
     }
 
     /**
