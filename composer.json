@@ -19,8 +19,11 @@
         "guzzlehttp/guzzle": "^7.0.0"
     },
     "require-dev": {
-        "pestphp/pest": "^2.x-dev",
-        "laravel/pint": "^1.5.0"
+        "pestphp/pest": "^2.0.0",
+        "pestphp/pest-plugin-mock": "^2.0.0",
+        "laravel/pint": "^1.5.0",
+        "symfony/var-dumper": "^6.2",
+        "phpstan/phpstan": "^1.9"
     },
     "config": {
         "allow-plugins": {
