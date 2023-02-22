@@ -13,8 +13,8 @@ trait UnArchivesResource
 
     /**
      * @param  int  $id
-     * @param  array  $query
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function unArchive(int $id, array $query = []): ?array

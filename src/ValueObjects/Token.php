@@ -21,7 +21,7 @@ readonly class Token
     }
 
     /**
-     * @param  array  $attributes
+     * @param  array{access_token: string, refresh_token: string, expires_in: int, created_at: int}  $attributes
      * @return Token
      */
     public static function fromArray(array $attributes): Token

@@ -12,8 +12,8 @@ trait IndexesResources
     use InteractsWithAPI;
 
     /**
-     * @param  array  $query
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function index(array $query = []): ?array

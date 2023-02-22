@@ -12,8 +12,8 @@ trait CreatesResource
     use InteractsWithAPI;
 
     /**
-     * @param  array  $body
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $body
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function create(array $body = []): ?array

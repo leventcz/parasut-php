@@ -29,9 +29,9 @@ class BankFee extends ApiResource
 
     /**
      * @param  int  $id
-     * @param  array  $query
-     * @param  array  $body
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @param  array<string, string|array<string, string>>  $body
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function pay(int $id, array $query = [], array $body = []): ?array

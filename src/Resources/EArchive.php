@@ -21,7 +21,7 @@ class EArchive extends ApiResource
 
     /**
      * @param  int  $id
-     * @return array|null
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function pdf(int $id): ?array

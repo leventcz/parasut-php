@@ -26,9 +26,9 @@ class PurchaseBill extends ApiResource
     protected string $resource = 'purchase_bills';
 
     /**
-     * @param  array  $query
-     * @param  array  $body
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @param  array<string, string|array<string, string>>  $body
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function createBasic(array $query = [], array $body = []): ?array
@@ -44,9 +44,9 @@ class PurchaseBill extends ApiResource
     }
 
     /**
-     * @param  array  $query
-     * @param  array  $body
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @param  array<string, string|array<string, string>>  $body
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function createDetailed(array $query = [], array $body = []): ?array
@@ -63,9 +63,9 @@ class PurchaseBill extends ApiResource
 
     /**
      * @param  int  $id
-     * @param  array  $query
-     * @param  array  $body
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @param  array<string, string|array<string, string>>  $body
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function editBasic(int $id, array $query = [], array $body = []): ?array
@@ -82,9 +82,9 @@ class PurchaseBill extends ApiResource
 
     /**
      * @param  int  $id
-     * @param  array  $query
-     * @param  array  $body
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @param  array<string, string|array<string, string>>  $body
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function editDetailed(int $id, array $query = [], array $body = []): ?array
@@ -101,9 +101,9 @@ class PurchaseBill extends ApiResource
 
     /**
      * @param  int  $id
-     * @param  array  $query
-     * @param  array  $body
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @param  array<string, string|array<string, string>>  $body
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function pay(int $id, array $query = [], array $body = []): ?array
@@ -120,8 +120,8 @@ class PurchaseBill extends ApiResource
 
     /**
      * @param  int  $id
-     * @param  array  $query
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function cancel(int $id, array $query = []): ?array
@@ -137,8 +137,8 @@ class PurchaseBill extends ApiResource
 
     /**
      * @param  int  $id
-     * @param  array  $query
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function recover(int $id, array $query = []): ?array

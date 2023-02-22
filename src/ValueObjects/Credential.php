@@ -23,7 +23,7 @@ readonly class Credential
     }
 
     /**
-     * @param  array  $attributes
+     * @param  array{client_id: string, client_secret: string, company_id: string, username: string, password: string}  $attributes
      * @return Credential
      */
     public static function fromArray(array $attributes): Credential

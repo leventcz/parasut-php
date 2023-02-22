@@ -13,8 +13,8 @@ trait ShowsResource
 
     /**
      * @param  int  $id
-     * @param  array  $query
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function show(int $id, array $query = []): ?array
