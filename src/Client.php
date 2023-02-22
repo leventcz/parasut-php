@@ -12,7 +12,7 @@ use Leventcz\Parasut\Resources\EArchive;
 use Leventcz\Parasut\Resources\EInvoice;
 use Leventcz\Parasut\Resources\EInvoiceInbox;
 use Leventcz\Parasut\Resources\Employee;
-use Leventcz\Parasut\Resources\ESMM;
+use Leventcz\Parasut\Resources\ESmm;
 use Leventcz\Parasut\Resources\InventoryLevel;
 use Leventcz\Parasut\Resources\ItemCategory;
 use Leventcz\Parasut\Resources\Product;
@@ -117,11 +117,11 @@ readonly class Client
     }
 
     /**
-     * @return ESMM
+     * @return ESmm
      */
-    public function eSMM(): ESMM
+    public function eSMM(): ESmm
     {
-        return new ESMM($this->httpClient);
+        return new ESmm($this->httpClient);
     }
 
     /**

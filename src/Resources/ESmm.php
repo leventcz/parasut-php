@@ -9,7 +9,7 @@ use Leventcz\Parasut\Resources\Concerns\CreatesResource;
 use Leventcz\Parasut\Resources\Concerns\ShowsResource;
 use Leventcz\Parasut\ValueObjects\Method;
 
-class ESMM extends ApiResource
+class ESmm extends ApiResource
 {
     use CreatesResource;
     use ShowsResource;
