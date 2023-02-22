@@ -22,9 +22,9 @@ interface HttpClientInterface
     /**
      * @param  Method  $method
      * @param  string  $uri
-     * @param  array  $query
-     * @param  array  $body
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @param  array<string, string|array<string, string>>  $body
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function authenticatedRequest(Method $method, string $uri, array $query = [], array $body = []): ?array;

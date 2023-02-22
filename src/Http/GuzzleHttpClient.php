@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Leventcz\Parasut\Http;
 
 use GuzzleHttp\Client;
+use JsonException;
 use Leventcz\Parasut\Exceptions\BadRequestException;
+use Leventcz\Parasut\Exceptions\ClientException;
 use Leventcz\Parasut\Exceptions\HttpException;
 use Leventcz\Parasut\Exceptions\NotFoundException;
-use Leventcz\Parasut\Exceptions\ClientException;
 use Leventcz\Parasut\Exceptions\UnauthorizedException;
+use Leventcz\Parasut\Exceptions\UnserializableResponse;
 use Leventcz\Parasut\Exceptions\ValidationException;
 use Leventcz\Parasut\ValueObjects\Credential;
 use Leventcz\Parasut\ValueObjects\Method;
@@ -17,7 +19,7 @@ use Leventcz\Parasut\ValueObjects\Token;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-final class HttpClient implements HttpClientInterface
+final class GuzzleHttpClient implements HttpClientInterface
 {
     /**
      * @var Token
@@ -27,7 +29,7 @@ final class HttpClient implements HttpClientInterface
     /**
      * @param  Client  $client
      * @param  Credential  $credential
-     * @param  array  $options
+     * @param  array<mixed>  $options
      */
     public function __construct(
         private readonly Client $client,
@@ -39,9 +41,9 @@ final class HttpClient implements HttpClientInterface
     /**
      * @param  Method  $method
      * @param  string  $uri
-     * @param  array  $query
-     * @param  array  $body
-     * @return array|null
+     * @param  array<string, string|array<string, string>>  $query
+     * @param  array<string, string|array<string, string>>  $body
+     * @return array<mixed>|null
      * @throws ClientException
      */
     public function authenticatedRequest(Method $method, string $uri, array $query = [], array $body = []): ?array
@@ -78,6 +80,7 @@ final class HttpClient implements HttpClientInterface
                 ]
             );
 
+        /** @var array{access_token: string, refresh_token: string, expires_in: int, created_at: int} $attributes */
         $attributes = $this->parseResponse($response);
 
         return Token::fromArray($attributes);
@@ -102,6 +105,7 @@ final class HttpClient implements HttpClientInterface
                 ]
             );
 
+        /** @var array{access_token: string, refresh_token: string, expires_in: int, created_at: int} $attributes */
         $attributes = $this->parseResponse($response);
 
         return Token::fromArray($attributes);
@@ -110,9 +114,9 @@ final class HttpClient implements HttpClientInterface
     /**
      * @param  Method  $method
      * @param  string  $uri
-     * @param  array  $header
-     * @param  array  $query
-     * @param  array  $body
+     * @param  array<string, string>  $header
+     * @param  array<string, string|array<string, string>>  $query
+     * @param  array<string, string|array<string, string>>  $body
      * @return ResponseInterface
      * @throws ClientException
      */
@@ -206,7 +210,7 @@ final class HttpClient implements HttpClientInterface
     }
 
     /**
-     * @return string[]
+     * @return array<string, string>
      * @throws ClientException
      */
     private function authorizationHeader(): array
@@ -224,10 +228,15 @@ final class HttpClient implements HttpClientInterface
 
     /**
      * @param  ResponseInterface  $response
-     * @return array|null
+     * @return array<mixed>
+     * @throws UnserializableResponse
      */
-    private function parseResponse(ResponseInterface $response): ?array
+    private function parseResponse(ResponseInterface $response): array
     {
-        return json_decode((string) $response->getBody(), true) ?: null;
+        try {
+            return (array) json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            throw new UnserializableResponse($e);
+        }
     }
 }
