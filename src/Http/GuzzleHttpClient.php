@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use JsonException;
 use Leventcz\Parasut\Exceptions\BadRequestException;
 use Leventcz\Parasut\Exceptions\ClientException;
+use Leventcz\Parasut\Exceptions\ForbiddenException;
 use Leventcz\Parasut\Exceptions\HttpException;
 use Leventcz\Parasut\Exceptions\NotFoundException;
 use Leventcz\Parasut\Exceptions\UnauthorizedException;
@@ -168,6 +169,7 @@ final class GuzzleHttpClient implements HttpClientInterface
         throw match ($response->getStatusCode()) {
             400 => new BadRequestException($body),
             401 => new UnauthorizedException($body),
+            403 => new ForbiddenException($body),
             404 => new NotFoundException($body),
             422 => new ValidationException($body),
             default => new HttpException($body),
