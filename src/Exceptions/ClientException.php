@@ -6,6 +6,6 @@ namespace Leventcz\Parasut\Exceptions;
 
 use Exception;
 
-abstract class ClientException extends Exception
+class ClientException extends Exception
 {
 }
