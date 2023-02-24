@@ -3,22 +3,14 @@
 use Leventcz\Parasut\Client;
 use Leventcz\Parasut\Parasut;
 
-$sampleCredential = [
-    'client_id' => '',
-    'client_secret' => '',
-    'company_id' => '',
-    'username' => '',
-    'password' => '',
-];
-
-it('creates simple client', function () use ($sampleCredential) {
-    $client = Parasut::client($sampleCredential);
+it('creates simple client', function () {
+    $client = Parasut::client(credential());
 
     expect($client)->toBeInstanceOf(Client::class);
 });
 
-it('creates client with options', function () use ($sampleCredential) {
-    $client = Parasut::client($sampleCredential, ['debug' => true]);
+it('creates client with options', function () {
+    $client = Parasut::client(credential(), ['debug' => true]);
 
     expect($client)->toBeInstanceOf(Client::class);
 });
