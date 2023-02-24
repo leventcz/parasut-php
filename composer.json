@@ -1,7 +1,11 @@
 {
     "name": "leventcz/parasut-php",
     "description": "Parasut API v4 client for PHP",
-    "keywords": ["parasut", "php", "sdk"],
+    "keywords": [
+        "parasut",
+        "php",
+        "sdk"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -9,11 +13,6 @@
             "email": "l.corapsiz@gmail.com"
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "Leventcz\\Parasut\\": "src/"
-        }
-    },
     "require": {
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.0.0"
@@ -24,6 +23,16 @@
         "laravel/pint": "^1.5.0",
         "symfony/var-dumper": "^6.2",
         "phpstan/phpstan": "^1.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Leventcz\\Parasut\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "config": {
         "allow-plugins": {
