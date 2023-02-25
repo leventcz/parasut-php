@@ -10,3 +10,11 @@ function credential(): array
         'password' => 'PASSWORD'
     ];
 }
+
+function invalidCredential(): array
+{
+    return [
+        'smth_invalid' => true,
+        'company_id' => 'COMPANY_ID',
+    ];
+}

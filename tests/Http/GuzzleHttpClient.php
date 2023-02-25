@@ -6,7 +6,6 @@ use Leventcz\Parasut\Http\GuzzleHttpClient;
 use Leventcz\Parasut\ValueObjects\Credential;
 use Leventcz\Parasut\ValueObjects\Method;
 
-
 beforeEach(function () {
     $this->guzzle = Mockery::mock(Client::class)
         ->makePartial();
@@ -53,7 +52,6 @@ it('uses existing active token in requests', function () {
     expect($firstResponse)->toBe([])
         ->and($secondResponse)->toBe([]);
 });
-
 
 it('refreshes expired token before sending request', function () {
     $this->guzzle
