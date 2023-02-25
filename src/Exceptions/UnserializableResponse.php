@@ -9,7 +9,7 @@ use JsonException;
 class UnserializableResponse extends ClientException
 {
     /**
-     * Creates a new Exception instance.
+     * @param  JsonException  $exception
      */
     public function __construct(JsonException $exception)
     {
