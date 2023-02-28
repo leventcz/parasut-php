@@ -37,7 +37,7 @@ $salesInvoices = $client
 $salesInvoices['data']; // array of sales invoices   
 $salesInvoices['meta']; // pagination meta
 
-// retrieve specified sales invoice with payments
+// retrieve the specified sales invoice with its payments
 $salesInvoice = $client
     ->salesInvoice()
     ->show(id: 1234, query: ['include' => 'payments']);
@@ -48,7 +48,7 @@ $salesInvoice['included']; // array of payments
 
 ### Methods & Parameters
 
-All methods fully follows related endpoint's naming convention and takes required/optional parameters as arguments.
+The methods fully follow the naming conventions of their related endpoints and take required and optional parameters as arguments.
 
 ```php
 // POST | https://api.parasut.com/v4/{company_id}/contacts/{id}/contact_debit_transactions
