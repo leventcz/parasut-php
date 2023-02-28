@@ -10,13 +10,12 @@ use Leventcz\Parasut\Resources\Concerns\ShowsResource;
 use Leventcz\Parasut\Resources\Concerns\UnArchivesResource;
 use Leventcz\Parasut\ValueObjects\Method;
 
-beforeEach(function() {
+beforeEach(function () {
     $this->httpClient = mock(HttpClientInterface::class)->makePartial();
 });
 
 it('indexes resources', function () {
-
-    $resource = new class($this->httpClient) extends ApiResource {
+    $resource = new class ($this->httpClient) extends ApiResource {
         use IndexesResources;
 
         protected string $resource = 'foo';
@@ -39,7 +38,7 @@ it('indexes resources', function () {
 });
 
 it('shows resource', function () {
-    $resource = new class($this->httpClient) extends ApiResource {
+    $resource = new class ($this->httpClient) extends ApiResource {
         use ShowsResource;
 
         protected string $resource = 'foo';
@@ -62,7 +61,7 @@ it('shows resource', function () {
 });
 
 it('edits resource', function () {
-    $resource = new class($this->httpClient) extends ApiResource {
+    $resource = new class ($this->httpClient) extends ApiResource {
         use EditsResource;
 
         protected string $resource = 'foo';
@@ -86,7 +85,7 @@ it('edits resource', function () {
 });
 
 it('deletes resource', function () {
-    $resource = new class($this->httpClient) extends ApiResource {
+    $resource = new class ($this->httpClient) extends ApiResource {
         use DeletesResource;
 
         protected string $resource = 'foo';
@@ -109,7 +108,7 @@ it('deletes resource', function () {
 });
 
 it('archives resource', function () {
-    $resource = new class($this->httpClient) extends ApiResource {
+    $resource = new class ($this->httpClient) extends ApiResource {
         use ArchivesResource;
 
         protected string $resource = 'foo';
@@ -132,7 +131,7 @@ it('archives resource', function () {
 });
 
 it('un-archives resource', function () {
-    $resource = new class($this->httpClient) extends ApiResource {
+    $resource = new class ($this->httpClient) extends ApiResource {
         use UnArchivesResource;
 
         protected string $resource = 'foo';
