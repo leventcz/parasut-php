@@ -119,7 +119,7 @@ readonly class Client
     /**
      * @return ESmm
      */
-    public function eSMM(): ESmm
+    public function eSmm(): ESmm
     {
         return new ESmm($this->httpClient);
     }
