@@ -26,7 +26,7 @@ $credentials = [
 $client = Parasut::client($credentials);
 ```
 
-### Samples
+### Examples
 
 ```php
 // paginate through sales invoices
