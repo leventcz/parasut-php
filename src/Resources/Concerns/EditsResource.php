@@ -18,7 +18,7 @@ trait EditsResource
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function edit(int $id, array $query = [], array $body = []): ?array
+    public function edit(int $id, array $query = [], array $body): ?array
     {
         return $this
             ->getHttpClient()

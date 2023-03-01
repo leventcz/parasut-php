@@ -16,7 +16,7 @@ trait CreatesResource
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function create(array $body = []): ?array
+    public function create(array $body): ?array
     {
         return $this
             ->getHttpClient()
