@@ -182,7 +182,7 @@ final class GuzzleHttpClient implements HttpClientInterface
      */
     private function requestIsFailed(ResponseInterface $response): bool
     {
-        return ! in_array($response->getStatusCode(), [200, 201, 204]);
+        return ! in_array($response->getStatusCode(), [200, 201, 202, 204]);
     }
 
     /**
