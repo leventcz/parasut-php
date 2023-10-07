@@ -28,13 +28,13 @@ class BankFee extends ApiResource
     protected string $resource = 'bank_fees';
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @param  array<string, string|array<string, string>>  $body
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function pay(int $id, array $query = [], array $body = []): ?array
+    public function pay(string $id, array $query = [], array $body = []): ?array
     {
         return $this
             ->getHttpClient()

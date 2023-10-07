@@ -20,11 +20,11 @@ class EInvoice extends ApiResource
     protected string $resource = 'e_invoices';
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function pdf(int $id): ?array
+    public function pdf(string $id): ?array
     {
         return $this
             ->getHttpClient()

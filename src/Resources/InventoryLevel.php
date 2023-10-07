@@ -15,12 +15,12 @@ class InventoryLevel extends ApiResource
     protected string $resource = 'inventory_levels';
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function index(int $id, array $query = []): ?array
+    public function index(string $id, array $query = []): ?array
     {
         return $this
             ->getHttpClient()

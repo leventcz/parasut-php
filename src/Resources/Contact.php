@@ -26,13 +26,13 @@ class Contact extends ApiResource
     protected string $resource = 'contacts';
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @param  array<string, string|array<string, string>>  $body
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function contactDebitTransactions(int $id, array $query = [], array $body = []): ?array
+    public function contactDebitTransactions(string $id, array $query = [], array $body = []): ?array
     {
         return $this
             ->getHttpClient()
@@ -45,13 +45,13 @@ class Contact extends ApiResource
     }
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @param  array<string, string|array<string, string>>  $body
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function contactCreditTransactions(int $id, array $query = [], array $body = []): ?array
+    public function contactCreditTransactions(string $id, array $query = [], array $body = []): ?array
     {
         return $this
             ->getHttpClient()

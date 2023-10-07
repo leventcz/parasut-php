@@ -30,13 +30,13 @@ class SalesInvoice extends ApiResource
     protected string $resource = 'sales_invoices';
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @param  array<string, string|array<string, string>>  $body
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function pay(int $id, array $query = [], array $body = []): ?array
+    public function pay(string $id, array $query = [], array $body = []): ?array
     {
         return $this
             ->getHttpClient()
@@ -49,12 +49,12 @@ class SalesInvoice extends ApiResource
     }
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function cancel(int $id, array $query = []): ?array
+    public function cancel(string $id, array $query = []): ?array
     {
         return $this
             ->getHttpClient()
@@ -66,12 +66,12 @@ class SalesInvoice extends ApiResource
     }
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function recover(int $id, array $query = []): ?array
+    public function recover(string $id, array $query = []): ?array
     {
         return $this
             ->getHttpClient()
@@ -83,13 +83,13 @@ class SalesInvoice extends ApiResource
     }
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @param  array<string, string|array<string, string>>  $body
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function convertToInvoice(int $id, array $query = [], array $body = []): ?array
+    public function convertToInvoice(string $id, array $query = [], array $body = []): ?array
     {
         return $this
             ->getHttpClient()

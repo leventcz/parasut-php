@@ -26,12 +26,12 @@ class Account extends ApiResource
     protected string $resource = 'accounts';
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function transactions(int $id, array $query = []): ?array
+    public function transactions(string $id, array $query = []): ?array
     {
         return $this
             ->getHttpClient()
@@ -43,13 +43,13 @@ class Account extends ApiResource
     }
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @param  array<string, string|array<string, string>>  $body
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function debitTransaction(int $id, array $query = [], array $body = []): ?array
+    public function debitTransaction(string $id, array $query = [], array $body = []): ?array
     {
         return $this
             ->getHttpClient()
@@ -62,13 +62,13 @@ class Account extends ApiResource
     }
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @param  array<string, string|array<string, string>>  $body
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function creditTransaction(int $id, array $query = [], array $body = []): ?array
+    public function creditTransaction(string $id, array $query = [], array $body = []): ?array
     {
         return $this
             ->getHttpClient()

@@ -12,12 +12,12 @@ trait ShowsResource
     use InteractsWithAPI;
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function show(int $id, array $query = []): ?array
+    public function show(string $id, array $query = []): ?array
     {
         return $this
             ->getHttpClient()

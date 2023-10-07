@@ -20,11 +20,11 @@ class ESmm extends ApiResource
     protected string $resource = 'e_smms';
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function pdf(int $id): ?array
+    public function pdf(string $id): ?array
     {
         return $this
             ->getHttpClient()

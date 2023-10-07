@@ -12,12 +12,12 @@ trait DeletesResource
     use InteractsWithAPI;
 
     /**
-     * @param  int  $id
+     * @param  string  $id
      * @param  array<string, string|array<string, string>>  $query
      * @return array<mixed>|null
      * @throws ClientException
      */
-    public function delete(int $id, array $query = []): ?array
+    public function delete(string $id, array $query = []): ?array
     {
         return $this
             ->getHttpClient()
