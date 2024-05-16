@@ -1,6 +1,6 @@
 name: Tests
 
-on: ['push', 'pull_request']
+on: [ 'push', 'pull_request' ]
 
 permissions:
   contents: read
@@ -11,29 +11,29 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest]
-        php: [8.2, 8.3]
-        dependency-version: [prefer-lowest, prefer-stable]
-        
-    name: Tests P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}    
+        os: [ ubuntu-latest ]
+        php: [ 8.2, 8.3 ]
+        dependency-version: [ prefer-lowest, prefer-stable ]
+
+    name: Tests P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      with:
-        path: ~/.composer/cache/files
-        key: dependencies-php-${{ matrix.php }}-${{ matrix.dependency-version }}-composer-${{ hashFiles('composer.json') }}
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-php-${{ matrix.php }}-${{ matrix.dependency-version }}-composer-${{ hashFiles('composer.json') }}
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php }}
-        coverage: none
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
 
-    - name: Install Composer Dependencies
-      run: composer update --${{ matrix.dependency-version }} --no-interaction --prefer-dist
+      - name: Install Composer Dependencies
+        run: composer update --${{ matrix.dependency-version }} --no-interaction --prefer-dist
 
-    - name: Run Test Suite
-      run: composer run-script test
+      - name: Run Test Suite
+        run: composer run-script test:unit
