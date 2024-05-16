@@ -1,5 +1,5 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/leventcz/parasut-php.svg?style=flat-square)](https://packagist.org/packages/leventcz/parasut-php)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/leventcz/parasut-php/tests.yml?branch=1.x&label=tests&style=flat-square)](https://github.com/leventcz/parasut-php/actions)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/leventcz/parasut-php/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/leventcz/parasut-php/actions)
 [![Licence](https://img.shields.io/github/license/leventcz/parasut-php.svg?style=flat-square)](https://github.com/leventcz/parausut-php/actions)
 
 # Parasut PHP API Client
