@@ -1,3 +1,7 @@
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/leventcz/parasut-php.svg?style=flat-square)](https://packagist.org/packages/leventcz/parasut-php)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/leventcz/parasut-php/tests.yml?branch=1.x&label=tests&style=flat-square)](https://github.com/leventcz/parasut-php/actions)
+[![Licence](https://img.shields.io/github/license/leventcz/parasut-php.svg?style=flat-square)](https://github.com/leventcz/parausut-php/actions)
+
 # Parasut PHP API Client
 
 Modern PHP API client that allows you to interact with the [Parasut API v4](https://apidocs.parasut.com/)
@@ -32,7 +36,7 @@ $client = Parasut::client($credentials);
 // paginate through sales invoices
 $salesInvoices = $client
     ->salesInvoice()
-    ->index(query: ['page' => ['size' => 10, 'number' => 4]]);
+    ->index(['page' => ['size' => 10, 'number' => 4]]);
 
 $salesInvoices['data']; // array of sales invoices   
 $salesInvoices['meta']; // pagination meta
@@ -40,7 +44,7 @@ $salesInvoices['meta']; // pagination meta
 // retrieve the specified sales invoice with its payments
 $salesInvoice = $client
     ->salesInvoice()
-    ->show(id: 1234, query: ['include' => 'payments']);
+    ->show($id, ['include' => 'payments']);
 
 $salesInvoice['data']; // sales invoice
 $salesInvoice['included']; // array of payments
@@ -54,12 +58,12 @@ The methods fully follow the naming conventions of their related endpoints and t
 // POST | https://api.parasut.com/v4/{company_id}/contacts/{id}/contact_debit_transactions
 $client
     ->contact()
-    ->contactDebitTransactions(id: $id: query: [], body: [])
+    ->contactDebitTransactions($id, $query, $body)
 
 // PATCH | https://api.parasut.com/v4/{company_id}/employees/{id}/archive
 $client
     ->employee()
-    ->archive(id: $id: query: [])
+    ->archive($id, $query)
 ```
 
 ### API Reference
