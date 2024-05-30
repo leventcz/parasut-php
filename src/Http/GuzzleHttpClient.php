@@ -235,6 +235,10 @@ final class GuzzleHttpClient implements HttpClientInterface
      */
     private function parseResponse(ResponseInterface $response): array
     {
+        if ($response->getStatusCode() === 204) {
+            return [];
+        }
+
         try {
             return (array) json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException $e) {
