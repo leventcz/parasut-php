@@ -134,7 +134,7 @@ final class GuzzleHttpClient implements HttpClientInterface
                 ->request(
                     $method->name,
                     $uri,
-                    [
+                    array_merge([
                         'base_uri' => self::BASE_URI,
                         'http_errors' => false,
                         'headers' => [
@@ -144,7 +144,7 @@ final class GuzzleHttpClient implements HttpClientInterface
                         ],
                         'query' => $query,
                         'json' => $body,
-                    ] + $this->options,
+                    ], $this->options),
                 );
         } catch (Throwable $exception) {
             throw new HttpException($exception->getMessage());
