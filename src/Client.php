@@ -26,6 +26,7 @@ use Leventcz\Parasut\Resources\Tax;
 use Leventcz\Parasut\Resources\TrackableJob;
 use Leventcz\Parasut\Resources\Transaction;
 use Leventcz\Parasut\Resources\WareHouse;
+use Leventcz\Parasut\Resources\SalesOffer;
 
 readonly class Client
 {
@@ -202,5 +203,13 @@ readonly class Client
     public function trackableJob(): TrackableJob
     {
         return new TrackableJob($this->httpClient);
+    }
+
+    /**
+     * @return SalesOffer
+     */
+    public function salesOffer(): SalesOffer
+    {
+        return new SalesOffer($this->httpClient);
     }
 }
