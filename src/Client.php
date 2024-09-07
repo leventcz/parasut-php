@@ -27,15 +27,14 @@ use Leventcz\Parasut\Resources\TrackableJob;
 use Leventcz\Parasut\Resources\Transaction;
 use Leventcz\Parasut\Resources\WareHouse;
 use Leventcz\Parasut\Resources\SalesOffer;
+use Leventcz\Parasut\Resources\Webhook;
 
 readonly class Client
 {
     /**
      * @param  HttpClientInterface  $httpClient
      */
-    public function __construct(private HttpClientInterface $httpClient)
-    {
-    }
+    public function __construct(private HttpClientInterface $httpClient) {}
 
     /**
      * @return SalesInvoice
@@ -211,5 +210,13 @@ readonly class Client
     public function salesOffer(): SalesOffer
     {
         return new SalesOffer($this->httpClient);
+    }
+
+    /**
+     * @return Webhook
+     */
+    public function webhook(): Webhook
+    {
+        return new Webhook($this->httpClient);
     }
 }
